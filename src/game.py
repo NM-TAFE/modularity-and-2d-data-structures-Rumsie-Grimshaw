@@ -9,17 +9,22 @@ def get_player():
         current_player = "O"
     return current_player
 
-def player_input(player):
+def get_player_input(current_player):
     # prints a message denoting the current players turn and asks for user input
-    player_move = input("Next move for player " + player + " (0-8): ")
-    if player_move.isdigit():
-        if 0 <= int(player_move) <= 8 and game_board.board[int(player_move)] == game_board.empty:
-            game_board.board[int(player_move)] = player
+    while True:
+        print("Next move for player " + current_player + " (0-8): ")
+        player_input = input()
+        if player_input.isdigit():
+            if 0 <= int(player_input) <= 8 and game_board.board[int(player_input)] == game_board.empty:
+                return player_input
+            elif 0 <= int(player_input) <= 8 and game_board.board[int(player_input)] != game_board.empty:
+                print("Space already taken!")
+            else:
+                print("Invalid input!")
         else:
-            print("Invalid input, please enter a valid number between (0-8):")
-    else:
-        # display error message and repeat loop
-        print("Invalid input, please enter a valid number between (0-8):")
+            # display error message and repeat loop
+            print("Invalid input!")
+
 
 # Check if winning conditions met.
 def is_winning_condition():
@@ -29,8 +34,9 @@ def is_winning_condition():
 def start_game():
     while True:
         game_board.display_board()
-        player = get_player()
-        player_input(player)
+        current_player = get_player()
+        value = get_player_input(current_player)
+        game_board.update_board(current_player, value)
         is_winning_condition()
 
 
