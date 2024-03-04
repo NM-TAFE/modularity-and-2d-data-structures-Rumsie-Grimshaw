@@ -1,6 +1,5 @@
 from board import game_board
 
-
 # Check remaining spaces on board and assign player based on odd or even number of remaining empty spaces.
 # Player One = Even and Player Two = Odd
 def get_player():
