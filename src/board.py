@@ -23,6 +23,7 @@ class GameBoard:
             # Cross-reference index with win_conditions to determine if game is won.
             for index in win_conditions:
                 if self.board[index[0]] == self.board[index[1]] == self.board[index[2]] != self.empty:
+                    self.display_board()
                     print("Player", game_board.board[index[0]], "wins!")
                     exit(0)
 
