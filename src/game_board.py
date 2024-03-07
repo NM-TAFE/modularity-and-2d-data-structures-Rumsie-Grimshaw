@@ -1,3 +1,5 @@
+# GameBoard Class #
+# ------------------------------------------------------------------------------------------------------------------------- #
 class GameBoard():
     def __init__(self):
         self.grid_x = 3
@@ -17,11 +19,10 @@ class GameBoard():
     def return_board_state(self):
         return self.board
 
-    def return_board_index(self, current_player, player_input):
+    def return_board_index(self, player_input):
         index = 0
         count_x = 0
         count_y = 0
-        board_space = []
 
         for row in self.board:
             for space in row:
@@ -39,3 +40,6 @@ class GameBoard():
                         count_x += 1
                         index += 1
 
+
+if __name__ == '__main__':
+    ...
