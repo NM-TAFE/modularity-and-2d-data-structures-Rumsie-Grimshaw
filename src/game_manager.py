@@ -1,4 +1,4 @@
-class GameManager():
+class GameManager:
     def __init__(self):
         ...
 
@@ -22,13 +22,13 @@ class GameManager():
         else:
             return "0"
 
-    def get_player_input(self, current_player):
+    def get_player_input(self, total_spaces, current_player):
         acceptable_range = False
         while not acceptable_range:
-            print(f"Next move for player {current_player} (0-8): ")
+            print(f"Next move for player {current_player} (0-{total_spaces}): ")
             player_input = input()
 
-            if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= 8:
+            if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= total_spaces:
                 return player_input
             else:
                 print("Invalid input!")
@@ -46,6 +46,30 @@ class GameManager():
             print("Invalid input! Space is already taken!")
         else:
             board_state[count_y][count_x] = current_player
+
+    def win_condition_met(self, board_state, current_player):
+        # TODO: Make modular!
+        win_conditions = [
+            # Left to Right
+            [board_state[0][0], board_state[0][1], board_state[0][2]],
+            [board_state[1][0], board_state[1][1], board_state[1][2]],
+            [board_state[2][0], board_state[2][1], board_state[2][2]],
+            # Top to Bottom
+            [board_state[0][0], board_state[1][0], board_state[2][0]],
+            # Diagonal Right
+            [board_state[0][0], board_state[1][1], board_state[2][2]],
+            # Diagonal Left
+            [board_state[0][2], board_state[1][1], board_state[2][0]],
+        ]
+        count = 0
+        for win in win_conditions:
+            if win_conditions[count] != [current_player, current_player, current_player]:
+                count += 1
+            elif win_conditions[count] == [current_player, current_player, current_player]:
+                print(f"Player {current_player} wins!")
+                return True
+            else:
+                return False
 
 
 if __name__ == '__main__':
