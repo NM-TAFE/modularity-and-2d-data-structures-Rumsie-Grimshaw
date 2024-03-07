@@ -15,9 +15,9 @@ def main():
 def start_game():
     game_board.generate_board()
     board_state = game_board.return_board_state()
+    # test.testAddThreeNumbersToFirstThreeRows(game_board)
     manager.display_board_state(board_state)
     total_spaces = game_board.return_total_board_spaces()
-    # test.testAddThreeNumbersToFirstThreeRows(game_board)
     game_completed = False
 
     while not game_completed:

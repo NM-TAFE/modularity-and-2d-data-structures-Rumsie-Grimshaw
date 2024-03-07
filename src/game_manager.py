@@ -3,10 +3,14 @@ class GameManager:
         ...
 
     def display_board_state(self, board_state):
-        count = 0
+        count_y = 0
         for row in board_state:
-            print(board_state[count])
-            count += 1
+            string = " | ".join(row)
+            print(string)
+            if count_y < len(board_state) - 1:
+                print("-" * len(string))
+                count_y += 1
+
 
     def return_count_empty_spaces(self, board_state):
         count = 0
@@ -46,6 +50,7 @@ class GameManager:
             print("Invalid input! Space is already taken!")
         else:
             board_state[count_y][count_x] = current_player
+
 
     def win_condition_met(self, board_state, current_player):
         # TODO: Make modular!
