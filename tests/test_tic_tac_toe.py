@@ -1,7 +1,7 @@
 import unittest
 
-import game
-from board import GameBoard
+import game_manager
+from game_board import GameBoard
 
 class TestTicTacToe(unittest.TestCase):
 

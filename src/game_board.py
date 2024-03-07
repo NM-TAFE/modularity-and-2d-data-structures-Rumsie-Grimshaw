@@ -1,11 +1,10 @@
-# GameBoard Class #
-# ------------------------------------------------------------------------------------------------------------------------- #
-class GameBoard():
+class GameBoard:
     def __init__(self):
         self.grid_x = 3
         self.grid_y = 3
         self.empty = " "
         self.board = []
+        self.total_space = (self.grid_x * self.grid_y) - 1
 
     def __str__(self):
         return f"This is a game board!"
@@ -19,16 +18,19 @@ class GameBoard():
     def return_board_state(self):
         return self.board
 
+    def return_total_board_spaces(self):
+        return self.total_space
+
     def return_board_index(self, player_input):
         index = 0
         count_x = 0
         count_y = 0
 
         for row in self.board:
-            for space in row:
+            for spaces in row:
                 for space in range(0, len(row)):
                     # test.testDisplayIndex(index, count_x, count_y)
-                    if count_x == 3:
+                    if count_x == len(row):
                         count_x = 0
                         count_y += 1
 
