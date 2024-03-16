@@ -3,13 +3,13 @@ class GameManager:
         ...
 
     def display_board_state(self, board_state):
-        count_y = 0
+        column_count = 0
         for row in board_state:
             string = " | ".join(row)
             print(string)
-            if count_y < len(board_state) - 1:
+            if column_count < len(board_state) - 1:
                 print("-" * len(string))
-                count_y += 1
+                column_count += 1
 
 
     def return_count_empty_spaces(self, board_state):
@@ -38,18 +38,18 @@ class GameManager:
                 print("Invalid input!")
 
     def space_availability(self, board_state, selected_space):
-        count_y, count_x = selected_space
-        if board_state[count_y][count_x] == " ":
+        column, row = selected_space
+        if board_state[column][row] == " ":
             return True
         else:
             return False
 
     def alter_board_space(self, board_state, current_player, is_empty_space, selected_space):
-        count_y, count_x = selected_space
+        column, row = selected_space
         if not is_empty_space:
             print("Invalid input! Space is already taken!")
         else:
-            board_state[count_y][count_x] = current_player
+            board_state[column][row] = current_player
 
 
     def win_condition_met(self, board_state, current_player):

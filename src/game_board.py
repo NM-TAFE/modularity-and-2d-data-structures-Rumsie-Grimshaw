@@ -1,17 +1,17 @@
 class GameBoard:
     def __init__(self):
-        self.grid_x = 3
-        self.grid_y = 3
+        self.row = 3
+        self.column = 3
         self.empty = " "
         self.board = []
-        self.total_space = (self.grid_x * self.grid_y) - 1
+        self.total_space = (self.row * self.column) - 1
 
     def __str__(self):
         return f"This is a game board!"
 
     def generate_board(self):
-        for row in range(self.grid_y):
-            row = [self.empty] * self.grid_x
+        for row in range(self.column):
+            row = [self.empty] * self.row
             self.board.append(row)
         return self.board
 
