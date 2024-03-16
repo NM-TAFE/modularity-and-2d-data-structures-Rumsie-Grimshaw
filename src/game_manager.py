@@ -35,7 +35,7 @@ class GameManager:
             print(f"Next move for player {current_player} (0-{total_spaces}): ")
             player_input = input()
 
-            # Checks that players input is both an int, and less than the equal or less than total board spaces;
+            # Checks that players input is both an int, and is less than the result of total_spaces;
             # else error.
             if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= total_spaces:
                 return player_input
