@@ -58,7 +58,6 @@ class GameManager:
         else:
             board_state[row][column] = current_player
 
-
     # Determine if win conditions are met.
     def win_condition_met(self, board_state, current_player):
         # TODO: Make modular!
