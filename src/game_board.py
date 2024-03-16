@@ -27,7 +27,7 @@ class GameBoard:
         count_y = 0
 
         for row in self.board:
-            for spaces in row:
+            for spaces in range(0, len(row)):
                 for space in range(0, len(row)):
                     # test.testDisplayIndex(index, count_x, count_y)
                     if count_x == len(row):

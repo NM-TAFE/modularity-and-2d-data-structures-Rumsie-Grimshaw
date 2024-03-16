@@ -38,6 +38,7 @@ def start_game():
         if not win_condition:
             if empty_spaces - 1 == 0:
                 print("Its a draw!")
+                return
         else:
             continue
 
