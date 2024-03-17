@@ -19,14 +19,14 @@ class GameManager:
             for space in row:
                 if space == " ":
                     count += 1
-        return count
+        return count - 1
 
     # Sets the player based; determined by analysing if remaining spaces are odd or even.
     def get_player(self, empty_spaces):
         if empty_spaces % 2 != 0:
-            return "X"
+            return "O"
         else:
-            return "0"
+            return "X"
 
     # Ask player for input and validates input
     def get_player_input(self, total_spaces, current_player):
@@ -59,7 +59,7 @@ class GameManager:
             board_state[row][column] = current_player
 
     # Determine if win conditions are met.
-    def win_condition_met(self, board_state, current_player):
+    def win_condition_met(self, board_state, current_player, empty_spaces):
         # TODO: Make modular!
         win_conditions = [
             # Left to Right
@@ -73,13 +73,17 @@ class GameManager:
             # Diagonal Left
             [board_state[0][2], board_state[1][1], board_state[2][0]],
         ]
-        count = 0
         for win in win_conditions:
             if win == [current_player, current_player, current_player]:
                 print(f"Player {current_player} wins!")
                 return True
 
-        return False
+        if empty_spaces == 0:
+            print("Its a draw!")
+            return True
+
+        else:
+            return False
 
 
 if __name__ == '__main__':

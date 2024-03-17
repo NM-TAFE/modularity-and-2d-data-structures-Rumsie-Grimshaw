@@ -1,10 +1,8 @@
 from game_board import GameBoard
 from game_manager import GameManager
-from test import Test
 
 manager = GameManager()
 game_board = GameBoard()
-test = Test()
 
 
 # The function that begins the game and is called from if __name__ = '__main__'
@@ -31,17 +29,8 @@ def start_game():
         manager.alter_board_space(board_state, current_player, is_empty_empty, selected_space)
         board_state = game_board.return_board_state()
         manager.display_board_state(board_state)
-        win_condition = manager.win_condition_met(board_state, current_player)
-
-        # Assessment of winning condition and pathways based on result
-        if win_condition:
-            game_completed = True
-        if not win_condition:
-            if empty_spaces - 1 == 0:
-                print("Its a draw!")
-                return
-        else:
-            continue
+        win_condition = manager.win_condition_met(board_state, current_player, empty_spaces)
+        game_completed = win_condition
 
 
 if __name__ == '__main__':
