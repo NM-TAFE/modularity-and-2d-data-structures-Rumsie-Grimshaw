@@ -75,13 +75,11 @@ class GameManager:
         ]
         count = 0
         for win in win_conditions:
-            if win_conditions[count] != [current_player, current_player, current_player]:
-                count += 1
-            elif win_conditions[count] == [current_player, current_player, current_player]:
+            if win == [current_player, current_player, current_player]:
                 print(f"Player {current_player} wins!")
                 return True
-            else:
-                return False
+
+        return False
 
 
 if __name__ == '__main__':
