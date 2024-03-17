@@ -2,7 +2,7 @@ import unittest
 from game_manager import GameManager
 from game_board import GameBoard
 
-class TestTicTacToe(unittest.TestCase):
+class TestGameManager(unittest.TestCase):
 
     def setUp(self):
         # Set up objects
