@@ -12,15 +12,6 @@ class GameManager:
                 print("-" * len(string))
                 column_count += 1
 
-    # Returns a value that represents the amount of remaining empty board spaces
-    def return_count_empty_spaces(self, board_state):
-        count = 0
-        for row in board_state:
-            for space in row:
-                if space == " ":
-                    count += 1
-        return count - 1
-
     # Sets the player based; determined by analysing if remaining spaces are odd or even.
     def get_player(self, empty_spaces):
         if empty_spaces % 2 != 0:
@@ -78,7 +69,7 @@ class GameManager:
                 print(f"Player {current_player} wins!")
                 return True
 
-        if empty_spaces == 0:
+        if empty_spaces <= 0:
             print("Its a draw!")
             return True
 
