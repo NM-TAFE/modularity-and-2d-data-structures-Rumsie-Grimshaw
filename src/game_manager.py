@@ -16,22 +16,22 @@ class GameManager:
 
     # Sets the player based; determined by analysing if remaining spaces are odd or even.
     def get_player(self, empty_spaces):
-        if empty_spaces % 2 != 0:
+        if empty_spaces % 2 == 0:
             current_player = self.first_player
         else:
-            current_player = self.first_player
+            current_player = self.second_player
         return current_player
 
     # Ask player for input and validates input
     def get_player_input(self, total_spaces, current_player):
         acceptable_range = False
         while not acceptable_range:
-            print(f"Next move for player {current_player} (0-{total_spaces}): ")
+            print(f"Next move for player {current_player} (0-{total_spaces - 1}): ")
             player_input = input()
 
             # Checks that players input is both an int, and is less than the result of total_spaces;
             # else error.
-            if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= total_spaces:
+            if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= total_spaces - 1:
                 return player_input
             else:
                 print("Invalid input!")
