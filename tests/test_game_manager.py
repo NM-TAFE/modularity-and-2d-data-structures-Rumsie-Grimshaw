@@ -11,7 +11,6 @@ class TestGameManager(unittest.TestCase):
 
         # Test Game Preparation
         self.game_board.generate_board()
-        self.board_state = self.game_board.return_board_state()
 
     # Check that values entered on a space that is already filled will not be overwritten. Test Index = 5
     def test_space_second_player_cannot_overwrite_first_player_space(self):
@@ -21,7 +20,7 @@ class TestGameManager(unittest.TestCase):
         self.game_board.board[1][1] = first_player
 
         # Act
-        self.game_manager.alter_board_space(self.board_state, second_player, False, (1, 1))
+        self.game_manager.alter_board_space(self.game_board.board, second_player, False, (1, 1))
         result = self.game_board.board[1][1]
 
         # Assert
@@ -30,14 +29,14 @@ class TestGameManager(unittest.TestCase):
     def test_game_is_not_yet_completed_with_both_players_having_three_turns_each(self):
         # Arrange
         first_player = 'X'
-        self.board_state = [['X', ' ', 'X'],
-                            [' ', 'O', 'X'],
-                            ['O', ' ', 'O']]
-        self.game_manager.display_board_state(self.board_state)
-        empty_spaces = self.game_manager.return_count_empty_spaces(self.board_state)
+        self.game_board.board = [['X', ' ', 'X'],
+                                 [' ', 'O', 'X'],
+                                 ['O', ' ', 'O']]
+        self.game_manager.display_board_state(self.game_board.board)
+        empty_spaces = self.game_board.return_count_empty_spaces()
 
         # Act
-        result = self.game_manager.win_condition_met(self.board_state, first_player, empty_spaces)
+        result = self.game_manager.win_condition_met(self.game_board.board, first_player, empty_spaces)
 
         # Assert
         self.assertFalse(result, "No winner should be detected; and game should continue.")
@@ -46,14 +45,14 @@ class TestGameManager(unittest.TestCase):
     def test_game_results_in_a_draw(self):
         # Arrange
         current_player = 'X'
-        self.board_state = [['X', 'O', 'X'],
-                            ['O', 'O', 'X'],
-                            ['O', 'X', 'O']]
-        self.game_manager.display_board_state(self.board_state)
-        empty_spaces = self.game_manager.return_count_empty_spaces(self.board_state)
+        self.game_board.board = [['X', 'O', 'X'],
+                                 ['X', 'O', 'X'],
+                                 ['O', 'X', 'O']]
+        self.game_manager.display_board_state(self.game_board.board)
+        empty_spaces = self.game_board.return_count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.board_state, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
         result = win_condition
 
         # Assert
@@ -63,14 +62,14 @@ class TestGameManager(unittest.TestCase):
     def test_game_player_one_win_top_row(self):
         # Arrange
         current_player = 'X'
-        self.board_state = [['X', 'X', 'X'],
-                            ['O', 'O', ' '],
-                            ['O', 'X', ' ']]
-        self.game_manager.display_board_state(self.board_state)
-        empty_spaces = self.game_manager.return_count_empty_spaces(self.board_state)
+        self.game_board.board = [['X', 'X', 'X'],
+                                 ['O', 'O', ' '],
+                                 ['O', 'X', ' ']]
+        self.game_manager.display_board_state(self.game_board.board)
+        empty_spaces = self.game_board.return_count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.board_state, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
         result = win_condition
 
         # Assert
@@ -79,14 +78,14 @@ class TestGameManager(unittest.TestCase):
     def test_game_player_two_wins_via_diagonal(self):
         # Arrange
         current_player = 'O'
-        self.board_state = [['X', 'X', 'O'],
-                            ['O', 'O', 'X'],
-                            ['O', 'X', ' ']]
-        self.game_manager.display_board_state(self.board_state)
-        empty_spaces = self.game_manager.return_count_empty_spaces(self.board_state)
+        self.game_board.board = [['X', 'X', 'O'],
+                                 ['O', 'O', 'X'],
+                                 ['O', 'X', ' ']]
+        self.game_manager.display_board_state(self.game_board.board)
+        empty_spaces = self.game_board.return_count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.board_state, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
         result = win_condition
 
         # Assert
@@ -94,7 +93,7 @@ class TestGameManager(unittest.TestCase):
 
     def test_current_player_is_player_one(self):
         # Arrange
-        empty_spaces = self.game_manager.return_count_empty_spaces(self.board_state)
+        empty_spaces = self.game_board.return_count_empty_spaces()
         current_player = self.game_manager.get_player(empty_spaces)
 
         # Act
