@@ -4,7 +4,7 @@ class GameBoard:
         self.column = 3
         self.empty = " "
         self.board = []
-        self.total_space = (self.row * self.column) - 1
+        self.total_space = self.row * self.column
 
     def __str__(self):
         return f"This is a game board!"
@@ -23,7 +23,7 @@ class GameBoard:
             for space in row:
                 if space == " ":
                     count += 1
-        return count - 1
+        return count
 
     # Iterate each index of row; increasing row # and resetting column count on each iteration until index found.
     # Return index when found.

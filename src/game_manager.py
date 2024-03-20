@@ -16,7 +16,7 @@ class GameManager:
 
     # Sets the player based; determined by analysing if remaining spaces are odd or even.
     def get_player(self, empty_spaces):
-        if empty_spaces % 2 == 0:
+        if empty_spaces % 2 != 0:
             current_player = self.first_player
         else:
             current_player = self.second_player
