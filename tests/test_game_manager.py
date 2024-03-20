@@ -15,16 +15,14 @@ class TestGameManager(unittest.TestCase):
     # Check that values entered on a space that is already filled will not be overwritten. Test Index = 5
     def test_space_second_player_cannot_overwrite_first_player_space(self):
         # Arrange
-        first_player = 'X'
-        second_player = 'O'
-        self.game_board.board[1][1] = first_player
+        self.game_board.board[1][1] = self.game_manager.first_player
 
         # Act
-        self.game_manager.alter_board_space(self.game_board.board, second_player, False, (1, 1))
+        self.game_manager.alter_board_space(self.game_board.board, self.game_manager.second_player, False, (1, 1))
         result = self.game_board.board[1][1]
 
         # Assert
-        self.assertEqual(result, first_player, "Space on board should still be occupied by player_one.")
+        self.assertEqual(result, self.game_manager.first_player, "Space on board should still be occupied by player_one.")
 
     def test_game_is_not_yet_completed_with_both_players_having_three_turns_each(self):
         # Arrange

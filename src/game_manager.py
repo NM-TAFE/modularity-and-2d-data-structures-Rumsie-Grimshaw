@@ -1,23 +1,26 @@
 class GameManager:
     def __init__(self):
-        ...
+        self.first_player = 'X'
+        self.second_player = 'O'
 
+    @ staticmethod
     # Prints the board to screen
-    def display_board_state(self, board_state):
+    def display_board_state(game_board):
         column_count = 0
-        for row in board_state:
+        for row in game_board:
             string = " | ".join(row)
             print(string)
-            if column_count < len(board_state) - 1:
+            if column_count < len(game_board) - 1:
                 print("-" * len(string))
                 column_count += 1
 
     # Sets the player based; determined by analysing if remaining spaces are odd or even.
     def get_player(self, empty_spaces):
         if empty_spaces % 2 != 0:
-            return "O"
+            current_player = self.first_player
         else:
-            return "X"
+            current_player = self.first_player
+        return current_player
 
     # Ask player for input and validates input
     def get_player_input(self, total_spaces, current_player):
@@ -50,19 +53,19 @@ class GameManager:
             board_state[row][column] = current_player
 
     # Determine if win conditions are met.
-    def win_condition_met(self, board_state, current_player, empty_spaces):
+    def win_condition_met(self, game_board, current_player, empty_spaces):
         # TODO: Make modular!
         win_conditions = [
             # Left to Right
-            [board_state[0][0], board_state[0][1], board_state[0][2]],
-            [board_state[1][0], board_state[1][1], board_state[1][2]],
-            [board_state[2][0], board_state[2][1], board_state[2][2]],
+            [game_board[0][0], game_board[0][1], game_board[0][2]],
+            [game_board[1][0], game_board[1][1], game_board[1][2]],
+            [game_board[2][0], game_board[2][1], game_board[2][2]],
             # Top to Bottom
-            [board_state[0][0], board_state[1][0], board_state[2][0]],
+            [game_board[0][0], game_board[1][0], game_board[2][0]],
             # Diagonal Right
-            [board_state[0][0], board_state[1][1], board_state[2][2]],
+            [game_board[0][0], game_board[1][1], game_board[2][2]],
             # Diagonal Left
-            [board_state[0][2], board_state[1][1], board_state[2][0]],
+            [game_board[0][2], game_board[1][1], game_board[2][0]],
         ]
         for win in win_conditions:
             if win == [current_player, current_player, current_player]:
