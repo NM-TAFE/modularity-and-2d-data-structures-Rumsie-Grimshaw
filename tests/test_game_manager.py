@@ -33,7 +33,7 @@ class TestGameManager(unittest.TestCase):
                                  [' ', 'O', 'X'],
                                  ['O', ' ', 'O']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.return_count_empty_spaces()
+        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
         result = self.game_manager.win_condition_met(self.game_board.board, first_player, empty_spaces)
@@ -49,7 +49,7 @@ class TestGameManager(unittest.TestCase):
                                  ['X', 'O', 'X'],
                                  ['O', 'X', 'O']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.return_count_empty_spaces()
+        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
         win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
@@ -66,7 +66,7 @@ class TestGameManager(unittest.TestCase):
                                  ['O', 'O', ' '],
                                  ['O', 'X', ' ']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.return_count_empty_spaces()
+        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
         win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
@@ -82,7 +82,7 @@ class TestGameManager(unittest.TestCase):
                                  ['O', 'O', 'X'],
                                  ['O', 'X', ' ']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.return_count_empty_spaces()
+        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
         win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
@@ -93,7 +93,7 @@ class TestGameManager(unittest.TestCase):
 
     def test_current_player_is_player_one(self):
         # Arrange
-        empty_spaces = self.game_board.return_count_empty_spaces()
+        empty_spaces = self.game_board.count_empty_spaces()
         current_player = self.game_manager.get_player(empty_spaces)
 
         # Act
@@ -101,7 +101,3 @@ class TestGameManager(unittest.TestCase):
 
         # Assert
         self.assertEqual(result, 'X', "Should display 'X' as current_player")
-
-
-
-

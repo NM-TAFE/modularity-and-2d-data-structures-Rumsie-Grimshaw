@@ -16,12 +16,8 @@ class GameBoard:
             self.board.append(row)
         return self.board
 
-    # Return a total count of the 2D data structure indexes
-    def return_total_board_spaces(self):
-        return self.total_space
-
     # Returns a value that represents the amount of remaining empty board spaces
-    def return_count_empty_spaces(self):
+    def count_empty_spaces(self):
         count = 0
         for row in self.board:
             for space in row:
@@ -31,7 +27,7 @@ class GameBoard:
 
     # Iterate each index of row; increasing row # and resetting column count on each iteration until index found.
     # Return index when found.
-    def return_board_index(self, player_input):
+    def board_index(self, player_input):
         index = 0
         column = 0
         row = 0

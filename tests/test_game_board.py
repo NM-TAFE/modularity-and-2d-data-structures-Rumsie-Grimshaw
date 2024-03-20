@@ -22,10 +22,10 @@ class TestGameBoard(unittest.TestCase):
 
     def test_return_total_empty_spaces_of_board(self):
         # Act
-        total_spaces = self.game_board.row * self.game_board.column
+        self.game_board.total_space = self.game_board.row * self.game_board.column
 
         # Assert
-        self.assertEqual(total_spaces, 9, "Default board should contain 9 spaces as is a 3x3 grid.")
+        self.assertEqual(self.game_board.total_space, 9, "Default board should contain 9 spaces as is a 3x3 grid.")
 
     def test_alter_board_size_and_return_total_spaces_of_board(self):
         # Arrange
@@ -43,16 +43,10 @@ class TestGameBoard(unittest.TestCase):
         player_input = 5
 
         # Act
-        result = self.game_board.return_board_index(player_input)
+        result = self.game_board.board_index(player_input)
 
         # Assert
         self.assertEqual(result, (1, 2), "Return game_board.board[1][2] on a standard 3x3 board")
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
