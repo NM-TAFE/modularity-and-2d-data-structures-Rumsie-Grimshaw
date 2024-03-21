@@ -3,18 +3,20 @@ class GameBoard:
         self.row = 3
         self.column = 3
         self.empty = " "
-        self.board = []
+        self.board = self.generate_board()
         self.total_space = self.row * self.column
+        self.empty_spaces = self.count_empty_spaces()
 
     def __str__(self):
         return f"This is a game board!"
 
     # Generates the object 2D data structure
     def generate_board(self):
-        for row in range(self.column):
+        board = []
+        for rows in range(self.column):
             row = [self.empty] * self.row
-            self.board.append(row)
-        return self.board
+            board.append(row)
+        return board
 
     # Returns a value that represents the amount of remaining empty board spaces
     def count_empty_spaces(self):
@@ -23,7 +25,8 @@ class GameBoard:
             for space in row:
                 if space == " ":
                     count += 1
-        return count
+        self.empty_spaces = count
+        return self.empty_spaces
 
     # Iterate each index of row; increasing row # and resetting column count on each iteration until index found.
     # Return index when found.

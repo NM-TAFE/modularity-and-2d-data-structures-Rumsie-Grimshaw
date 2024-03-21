@@ -31,10 +31,10 @@ class TestGameManager(unittest.TestCase):
                                  [' ', 'O', 'X'],
                                  ['O', ' ', 'O']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
-        result = self.game_manager.win_condition_met(self.game_board.board, first_player, empty_spaces)
+        result = self.game_manager.win_condition_met(self.game_board.board, first_player,
+                                                     self.game_board.empty_spaces)
 
         # Assert
         self.assertFalse(result, "No winner should be detected; and game should continue.")
@@ -47,10 +47,11 @@ class TestGameManager(unittest.TestCase):
                                  ['X', 'O', 'X'],
                                  ['O', 'X', 'O']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.count_empty_spaces()
+        self.game_board.count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player,
+                                                            self.game_board.empty_spaces)
         result = win_condition
 
         # Assert
@@ -64,10 +65,10 @@ class TestGameManager(unittest.TestCase):
                                  ['O', 'O', ' '],
                                  ['O', 'X', ' ']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player,
+                                                            self.game_board.empty_spaces)
         result = win_condition
 
         # Assert
@@ -80,10 +81,10 @@ class TestGameManager(unittest.TestCase):
                                  ['O', 'O', 'X'],
                                  ['O', 'X', ' ']]
         self.game_manager.display_board_state(self.game_board.board)
-        empty_spaces = self.game_board.count_empty_spaces()
 
         # Act
-        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player, empty_spaces)
+        win_condition = self.game_manager.win_condition_met(self.game_board.board, current_player,
+                                                            self.game_board.empty_spaces)
         result = win_condition
 
         # Assert

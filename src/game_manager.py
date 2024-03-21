@@ -67,8 +67,8 @@ class GameManager:
             # Diagonal Left
             [game_board[0][2], game_board[1][1], game_board[2][0]],
         ]
-        for win in win_conditions:
-            if win == [current_player, current_player, current_player]:
+        for conditions in win_conditions:
+            if all(current_player == player for player in conditions):
                 print(f"Player {current_player} wins!")
                 return True
 
@@ -76,8 +76,7 @@ class GameManager:
             print("Its a draw!")
             return True
 
-        else:
-            return False
+        return False
 
 
 if __name__ == '__main__':
