@@ -24,19 +24,20 @@ class GameManager:
             self.current_player = self.second_player
         return self.current_player
 
-    # Ask player for input and validates input
+    # Ask player for input and validates player input
     def get_player_input(self):
-        acceptable_range = False
-        while not acceptable_range:
+        while True:
             print(f"Next move for player {self.current_player} (0-{self.game_board.total_space - 1}): ")
             player_input = input()
-
-            # Checks that players input is both an int, and is less than the result of total_spaces;
-            # else error.
-            if player_input.isdigit() and 0 <= int(player_input) and int(player_input) <= self.game_board.total_space - 1:
-                return player_input
-            else:
-                print("Invalid input!")
+            # Checks that players input is both an int, and is within the acceptable range or throw ValueError.
+            try:
+                player_input = int(player_input)
+                if 0 <= player_input < self.game_board.total_space:
+                    return player_input
+                else:
+                    print("Input is out of range!")
+            except ValueError:
+                print("Invalid input! Please enter a valid integer.")
 
     # Checks if space is empty and returns boolean value.
     def space_availability(self, selected_space):
@@ -75,9 +76,6 @@ class GameManager:
         if self.game_board.empty_spaces <= 0:
             print("Its a draw!")
             return True
-
-        return False
-
 
 if __name__ == '__main__':
     ...
