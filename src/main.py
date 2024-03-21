@@ -21,7 +21,6 @@ def start_game():
         selected_space = game.game_board.board_index(player_move)
         is_empty_empty = game.space_availability(selected_space)
         game.alter_board_space(is_empty_empty, selected_space)
-        game.game_board.count_empty_spaces()
         game.display_board_state()
         win_condition = game.has_winner()
         game_completed = win_condition

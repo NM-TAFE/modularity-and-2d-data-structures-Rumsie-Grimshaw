@@ -52,6 +52,7 @@ class GameManager:
             print("Invalid input! Space is already taken!")
         else:
             self.game_board.board[row][column] = self.current_player
+            self.game_board.count_empty_spaces()
 
     # Determine if win conditions are met.
     def has_winner(self):
