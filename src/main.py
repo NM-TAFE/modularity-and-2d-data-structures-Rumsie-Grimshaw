@@ -1,9 +1,7 @@
 from game_board import GameBoard
 from game_manager import GameManager
 
-manager = GameManager()
-game_board = GameBoard()
-
+game = GameManager()
 
 # The function that begins the game and is called from if __name__ = '__main__'
 def main():
@@ -13,20 +11,19 @@ def main():
 # Game loop that runs until completion
 def start_game():
     # Initial Game Setup
-    manager.display_board_state(game_board.board)
+    game.display_board_state()
     game_completed = False
 
     # Game loop starts here
     while not game_completed:
-        print(game_board.empty_spaces)
-        current_player = manager.get_player(game_board.empty_spaces)
-        player_move = manager.get_player_input(game_board.total_space, current_player)
-        selected_space = game_board.board_index(player_move)
-        is_empty_empty = manager.space_availability(game_board.board, selected_space)
-        manager.alter_board_space(game_board.board, current_player, is_empty_empty, selected_space)
-        game_board.count_empty_spaces()
-        manager.display_board_state(game_board.board)
-        win_condition = manager.win_condition_met(game_board.board, current_player, game_board.empty_spaces)
+        game.get_player()
+        player_move = game.get_player_input()
+        selected_space = game.game_board.board_index(player_move)
+        is_empty_empty = game.space_availability(selected_space)
+        game.alter_board_space(is_empty_empty, selected_space)
+        game.game_board.count_empty_spaces()
+        game.display_board_state()
+        win_condition = game.has_winner()
         game_completed = win_condition
 
 
