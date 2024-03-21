@@ -54,29 +54,33 @@ class GameManager:
             self.game_board.board[row][column] = self.current_player
             self.game_board.count_empty_spaces()
 
-    # Determine if win conditions are met.
-    def has_winner(self):
-        # TODO: Make modular!
-        win_conditions = [
-            # Left to Right
-            [self.game_board.board[0][0], self.game_board.board[0][1], self.game_board.board[0][2]],
-            [self.game_board.board[1][0], self.game_board.board[1][1], self.game_board.board[1][2]],
-            [self.game_board.board[2][0], self.game_board.board[2][1], self.game_board.board[2][2]],
-            # Top to Bottom
-            [self.game_board.board[0][0], self.game_board.board[1][0], self.game_board.board[2][0]],
-            # Diagonal Right
-            [self.game_board.board[0][0], self.game_board.board[1][1], self.game_board.board[2][2]],
-            # Diagonal Left
-            [self.game_board.board[0][2], self.game_board.board[1][1], self.game_board.board[2][0]],
-        ]
-        for conditions in win_conditions:
-            if all(self.current_player == player for player in conditions):
-                print(f"Player {self.current_player} wins!")
+    # Iterate across all rows in board and return True if contains only current_players.
+    def is_winner_by_row(self):
+        for row in self.game_board.board:
+            if all(self.current_player == player for player in row):
                 return True
 
-        if self.game_board.empty_spaces <= 0:
-            print("Its a draw!")
-            return True
+    # Iterate through each column in board and return True is each row[column] contains only current_player.
+    def is_winner_by_column(self):
+        for column in range(len(self.game_board.board[0])):
+            if all(self.current_player == row[column] for row in self.game_board.board):
+                return True
+
+    def is_winner_by_diagonal(self):
+        ...
+
+    # Determine if win conditions are met.
+    def has_winner(self):
+        is_winner_by_row = self.is_winner_by_row()
+        is_winner_by_column = self.is_winner_by_column()
+        is_winner_by_diagonal = self.is_winner_by_diagonal()
+
+        conditions = [is_winner_by_row, is_winner_by_column, is_winner_by_diagonal]
+        for result in conditions:
+            if result:
+                print(f"Player {self.current_player} win!")
+                return True
+
 
 if __name__ == '__main__':
     ...

@@ -38,7 +38,7 @@ class TestGameManager(unittest.TestCase):
         self.current_player = self.game.current_player
         self.game.game_board.board = [['X', 'O', 'X'],
                                       ['X', 'O', 'X'],
-                                      ['', 'X', 'O']]
+                                      [' ', 'X', 'O']]
         selected_space = self.game.game_board.board_index(6)
         self.game.alter_board_space(True, selected_space)
 
@@ -91,3 +91,18 @@ class TestGameManager(unittest.TestCase):
 
         # Assert
         self.assertEqual(result, 'X', "Should display 'X' as current_player")
+
+
+    def test_game_player_two_wins_via_top_down(self):
+        # Arrange
+        self.game.game_board.board = [['X', 'X', 'O'],
+                                      ['O', 'X', 'O'],
+                                      ['O', 'X', ' ']]
+        self.game.display_board_state()
+
+        # Act
+        win_condition = self.game.has_winner()
+        result = win_condition
+
+        # Assert
+        self.assertTrue(result, "Win message for 'O' should be displayed.")
