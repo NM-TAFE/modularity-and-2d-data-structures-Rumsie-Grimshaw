@@ -1,3 +1,8 @@
+"""
+A TicTacToe GameManager class that controls the game logic and basic management of the game.
+Date: 24.03.21
+Author: Rhys Boyle
+"""
 from game_board import GameBoard
 class GameManager:
     def __init__(self):

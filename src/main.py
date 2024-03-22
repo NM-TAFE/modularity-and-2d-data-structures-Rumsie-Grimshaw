@@ -1,4 +1,8 @@
-from game_board import GameBoard
+"""
+A TicTacToe game that utilises 2D data structures to store and retrieve information for the user.
+Date: 24.03.21
+Author: Rhys Boyle
+"""
 from game_manager import GameManager
 
 game = GameManager()

@@ -1,3 +1,8 @@
+"""
+A TicTacToe GameBoard class that represents the game board and its state.
+Date: 24.03.21
+Author: Rhys Boyle
+"""
 class GameBoard:
     def __init__(self):
         self.row = 3
