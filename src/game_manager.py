@@ -68,16 +68,18 @@ class GameManager:
 
     # Retrieve the index of each row using the same int(index) value for [row][column] and return True if current_player
     # symbol stored in [0][0], [1][1], [2][2]
-    def is_winner_by_descending_left_diagonal(self):
+    def is_winner_by_descending_right_diagonal(self):
         row_length = len(self.game_board.board)
         if all(self.game_board.board[index][index] == self.current_player for index in range(row_length)):
             return True
 
-    # Iterate the length of row and check column minus row count for current player stored in [0][2], [1][1], [2][0].
-    def is_winner_by_descending_right_diagonal(self):
+    # Iterate the length of each row and check diagonally left if current player stored in [0][2], [1][1], [2][0].
+    # Column index is calculated as the current row number - 1 to set direction.
+    # Return True if all current_player stored in diagonal left spaces.
+    def is_winner_by_descending_left_diagonal(self):
         row_length = len(self.game_board.board)
-        column_index = -1
-        if all(self.game_board.board[index][column_index-index] == self.current_player for index in range(row_length)):
+        modifier = -1
+        if all(self.game_board.board[index][modifier-index] == self.current_player for index in range(row_length)):
             return True
 
     def is_draw(self):
@@ -87,8 +89,8 @@ class GameManager:
     def has_winner(self):
         is_winner_by_row = self.is_winner_by_row()
         is_winner_by_column = self.is_winner_by_column()
-        is_winner_by_descending_left_diagonal = self.is_winner_by_descending_left_diagonal()
-        is_winner_by_descending_right_diagonal = self.is_winner_by_descending_right_diagonal()
+        is_winner_by_descending_left_diagonal = self.is_winner_by_descending_right_diagonal()
+        is_winner_by_descending_right_diagonal = self.is_winner_by_descending_left_diagonal()
 
         conditions = [is_winner_by_row,
                       is_winner_by_column,
