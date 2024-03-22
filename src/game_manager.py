@@ -5,6 +5,8 @@ class GameManager:
         self.first_player = 'X'
         self.second_player = 'O'
         self.current_player = self.get_player()
+        self.game_completed = False
+        self.display_board_state()
 
     # Prints the board to screen
     def display_board_state(self):
@@ -83,7 +85,9 @@ class GameManager:
             return True
 
     def is_draw(self):
-        ...
+        if self.game_board.empty_spaces == 0:
+            print(f"Game is a draw!")
+            self.game_completed = True
 
     # Determine if win conditions are met.
     def has_winner(self):
@@ -100,7 +104,7 @@ class GameManager:
         for result in conditions:
             if result:
                 print(f"Player {self.current_player} win!")
-                return True
+                self.game_completed = True
 
 
 if __name__ == '__main__':
