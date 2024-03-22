@@ -6,8 +6,8 @@ class GameManager:
         self.second_player = 'O'
         self.current_player = self.get_player()
         self.game_completed = False
-        self.display_board_state()
         self.player_move = 0
+        self.is_space_empty = False
 
     # Prints the board to screen
     def display_board_state(self):
@@ -45,35 +45,37 @@ class GameManager:
                 print("Invalid input! Please enter a valid integer.")
 
     # Checks if space is empty and returns boolean value.
-    def space_availability(self, selected_space):
-        row, column = selected_space
+    def space_availability(self):
+        row, column = self.game_board.board_index
         if self.game_board.board[row][column] == " ":
-            return True
+            self.is_space_empty = True
+        else:
+            self.is_space_empty = False
 
     # Stores player char in 2D data structure if array index is empty; else error.
-    def alter_board_space(self, is_empty_space, selected_space):
-        row, column = selected_space
-        if not is_empty_space:
+    def alter_board_space(self):
+        row, column = self.game_board.board_index
+        if not self.is_space_empty:
             print("Invalid input! Space is already taken!")
         else:
             self.game_board.board[row][column] = self.current_player
             self.game_board.count_empty_spaces()
 
     # Iterate across all rows in board and return True if contains only current_players.
-    def is_winner_by_row(self):
+    def win_by_row(self):
         for row in self.game_board.board:
             if all(self.current_player == player for player in row):
                 return True
 
     # Iterate through each column in board and return True if each row[column] contains only current_player.
-    def is_winner_by_column(self):
+    def win_by_column(self):
         for column in range(len(self.game_board.board[0])):
             if all(self.current_player == row[column] for row in self.game_board.board):
                 return True
 
     # Retrieve the index of each row using the same int(index) value for [row][column] and return True if current_player
     # symbol stored in [0][0], [1][1], [2][2]
-    def is_winner_by_descending_right_diagonal(self):
+    def win_by_descending_right_diagonal(self):
         row_length = len(self.game_board.board)
         if all(self.game_board.board[index][index] == self.current_player for index in range(row_length)):
             return True
@@ -81,10 +83,10 @@ class GameManager:
     # Iterate the length of each row and check diagonally left if current player stored in [0][2], [1][1], [2][0].
     # Column index is calculated as the current row number - 1 to set direction.
     # Return True if all current_player stored in diagonal left spaces.
-    def is_winner_by_descending_left_diagonal(self):
+    def win_by_descending_left_diagonal(self):
         row_length = len(self.game_board.board)
-        modifier = -1
-        if all(self.game_board.board[index][modifier-index] == self.current_player for index in range(row_length)):
+        if all(self.game_board.board[index][row_length - 1 - index] == self.current_player
+               for index in range(row_length)):
             return True
 
     def is_draw(self):
@@ -94,10 +96,10 @@ class GameManager:
 
     # Determine if win conditions are met.
     def has_winner(self):
-        is_winner_by_row = self.is_winner_by_row()
-        is_winner_by_column = self.is_winner_by_column()
-        is_winner_by_descending_left_diagonal = self.is_winner_by_descending_right_diagonal()
-        is_winner_by_descending_right_diagonal = self.is_winner_by_descending_left_diagonal()
+        is_winner_by_row = self.win_by_row()
+        is_winner_by_column = self.win_by_column()
+        is_winner_by_descending_left_diagonal = self.win_by_descending_right_diagonal()
+        is_winner_by_descending_right_diagonal = self.win_by_descending_left_diagonal()
 
         conditions = [is_winner_by_row,
                       is_winner_by_column,

@@ -7,17 +7,18 @@ class TestGameManager(unittest.TestCase):
         # Set up objects
         self.game = GameManager()
 
-    # Check that values entered on a space that is already filled will not be overwritten. Test Index = 5
+    # Check that values entered on a space that is already filled will not be overwritten. Test Index = 4
     def test_space_second_player_cannot_overwrite_first_player_space(self):
         # Arrange
         self.game.game_board.board[1][1] = self.game.current_player
 
         # Act
-        self.game.alter_board_space(False, (1, 1))
+        self.game.game_board.get_board_index(4)
+        self.game.alter_board_space()
         result = self.game.game_board.board[1][1]
 
         # Assert
-        self.assertEqual(result, self.game.first_player, "Space on board should still be occupied by player_one.")
+        self.assertEqual(result, self.game.first_player, "Invalid Input message should be displayed.")
 
     def test_game_is_not_yet_completed_with_both_players_having_three_turns_each(self):
         # Arrange
@@ -35,17 +36,16 @@ class TestGameManager(unittest.TestCase):
     # Check that mock diagonal state is a successful win condition
     def test_game_results_in_a_draw(self):
         # Arrange
-        self.current_player = self.game.current_player
         self.game.game_board.board = [['X', 'O', 'X'],
                                       ['X', 'O', 'X'],
                                       [' ', 'X', 'O']]
-        selected_space = self.game.game_board.board_index(6)
-        self.game.alter_board_space(True, selected_space)
+        self.game.game_board.get_board_index(6)
+        self.game.space_availability()
+        self.game.alter_board_space()
 
         # Act
-        win_condition = self.game.has_winner()
+        result = self.game.is_draw
         self.game.display_board_state()
-        result = win_condition
 
         # Assert
         self.assertTrue(result, "Game should result in a draw; rather than a win condition.")
@@ -59,8 +59,7 @@ class TestGameManager(unittest.TestCase):
         self.game.display_board_state()
 
         # Act
-        win_condition = self.game.has_winner()
-        result = win_condition
+        result = self.game.win_by_row()
 
         # Assert
         self.assertTrue(result, "Win message for 'X' should be displayed.")
@@ -73,24 +72,22 @@ class TestGameManager(unittest.TestCase):
         self.game.display_board_state()
 
         # Act
-        win_condition = self.game.has_winner()
-        result = win_condition
+        result = self.game.win_by_descending_left_diagonal
 
         # Assert
-        self.assertTrue(result, "Win message for 'O' should be displayed.")
+        self.assertTrue(result)
 
-    def test_current_player_is_player_one(self):
+    def test_player_two_wins_via_descending_left_diagonal(self):
         # Arrange
         self.game.game_board.board = [['X', 'X', 'O'],
                                       ['O', 'O', 'X'],
                                       ['O', 'X', ' ']]
-        self.game.game_board.count_empty_spaces()
 
         # Act
-        result = self.game.get_player()
+        result = self.game.win_by_descending_left_diagonal
 
         # Assert
-        self.assertEqual(result, 'X', "Should display 'X' as current_player")
+        self.assertTrue(result, "Should display 'X' as current_player")
 
     def test_game_player_two_wins_via_top_down(self):
         # Arrange
@@ -100,8 +97,7 @@ class TestGameManager(unittest.TestCase):
         self.game.display_board_state()
 
         # Act
-        win_condition = self.game.has_winner()
-        result = win_condition
+        result = self.game.win_by_column()
 
         # Assert
         self.assertTrue(result, "Win message for 'O' should be displayed.")

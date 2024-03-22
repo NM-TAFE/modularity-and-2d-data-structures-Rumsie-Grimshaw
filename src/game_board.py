@@ -6,6 +6,7 @@ class GameBoard:
         self.board = self.generate_board()
         self.total_space = self.row * self.column
         self.empty_spaces = self.count_empty_spaces()
+        self.board_index = 0, 0
 
     def __str__(self):
         return f"This is a game board!"
@@ -31,6 +32,7 @@ class GameBoard:
     # Iterate each index of row; increasing row # and resetting column count on each iteration until index found.
     # Return index when found.
     def get_board_index(self, player_move):
+        # ToDo: This method could probably use rewriting.
         index = 0
         column = 0
         row = 0
@@ -43,8 +45,8 @@ class GameBoard:
                         row += 1
 
                     elif index == int(player_move):
-                        board_space = row, column
-                        return board_space
+                        self.board_index = row, column
+                        return
 
                     else:
                         column += 1

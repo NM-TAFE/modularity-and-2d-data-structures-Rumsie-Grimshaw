@@ -11,12 +11,13 @@ def main():
 # Game loop that runs until completion
 def start_game():
     # Game loop starts here
+    game.display_board_state()
     while not game.game_completed:
         game.get_player()
         game.get_player_input()
-        selected_space = game.game_board.get_board_index(game.player_move)
-        is_empty_empty = game.space_availability(selected_space)
-        game.alter_board_space(is_empty_empty, selected_space)
+        game.game_board.get_board_index(game.player_move)
+        game.space_availability()
+        game.alter_board_space()
         game.display_board_state()
         game.has_winner()
         game.is_draw()

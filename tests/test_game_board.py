@@ -40,10 +40,10 @@ class TestGameBoard(unittest.TestCase):
 
     def test_return_the_correct_index_of_board_based_on_player_input(self):
         # Arrange
-        player_input = 5
+        self.game_board.get_board_index(5)
 
         # Act
-        result = self.game_board.board_index(player_input)
+        result = self.game_board.board_index
 
         # Assert
         self.assertEqual(result, (1, 2), "Return game_board.board[1][2] on a standard 3x3 board")
