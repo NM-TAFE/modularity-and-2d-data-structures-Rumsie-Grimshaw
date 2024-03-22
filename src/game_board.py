@@ -30,7 +30,7 @@ class GameBoard:
 
     # Iterate each index of row; increasing row # and resetting column count on each iteration until index found.
     # Return index when found.
-    def board_index(self, player_input):
+    def get_board_index(self, player_move):
         index = 0
         column = 0
         row = 0
@@ -42,7 +42,7 @@ class GameBoard:
                         column = 0
                         row += 1
 
-                    elif index == int(player_input):
+                    elif index == int(player_move):
                         board_space = row, column
                         return board_space
 

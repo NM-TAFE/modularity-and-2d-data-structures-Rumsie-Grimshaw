@@ -7,6 +7,7 @@ class GameManager:
         self.current_player = self.get_player()
         self.game_completed = False
         self.display_board_state()
+        self.player_move = 0
 
     # Prints the board to screen
     def display_board_state(self):
@@ -35,7 +36,9 @@ class GameManager:
             try:
                 player_input = int(player_input)
                 if 0 <= player_input < self.game_board.total_space:
-                    return player_input
+                    player_move = player_input
+                    self.player_move = player_move
+                    return player_move
                 else:
                     print("Input is out of range!")
             except ValueError:
