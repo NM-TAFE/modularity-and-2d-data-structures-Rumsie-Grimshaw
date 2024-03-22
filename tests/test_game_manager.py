@@ -92,7 +92,6 @@ class TestGameManager(unittest.TestCase):
         # Assert
         self.assertEqual(result, 'X', "Should display 'X' as current_player")
 
-
     def test_game_player_two_wins_via_top_down(self):
         # Arrange
         self.game.game_board.board = [['X', 'X', 'O'],

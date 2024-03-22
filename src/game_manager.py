@@ -60,20 +60,27 @@ class GameManager:
             if all(self.current_player == player for player in row):
                 return True
 
-    # Iterate through each column in board and return True is each row[column] contains only current_player.
+    # Iterate through each column in board and return True if each row[column] contains only current_player.
     def is_winner_by_column(self):
         for column in range(len(self.game_board.board[0])):
             if all(self.current_player == row[column] for row in self.game_board.board):
                 return True
 
-    def is_winner_by_diagonal(self):
+    # Retrieve the index of each row using the same int(i) value for [row][column] and return True if current_player
+    # symbol stored in [0][0], [1][1], [2][2]
+    def is_winner_by_descending_left_diagonal(self):
+        board_rows = len(self.game_board.board)
+        if all(self.game_board.board[i][i] == self.current_player for i in range(board_rows)):
+            return True
+
+    def is_draw(self):
         ...
 
     # Determine if win conditions are met.
     def has_winner(self):
         is_winner_by_row = self.is_winner_by_row()
         is_winner_by_column = self.is_winner_by_column()
-        is_winner_by_diagonal = self.is_winner_by_diagonal()
+        is_winner_by_diagonal = self.is_winner_by_descending_left_diagonal()
 
         conditions = [is_winner_by_row, is_winner_by_column, is_winner_by_diagonal]
         for result in conditions:
