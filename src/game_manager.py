@@ -66,11 +66,18 @@ class GameManager:
             if all(self.current_player == row[column] for row in self.game_board.board):
                 return True
 
-    # Retrieve the index of each row using the same int(i) value for [row][column] and return True if current_player
+    # Retrieve the index of each row using the same int(index) value for [row][column] and return True if current_player
     # symbol stored in [0][0], [1][1], [2][2]
     def is_winner_by_descending_left_diagonal(self):
-        board_rows = len(self.game_board.board)
-        if all(self.game_board.board[i][i] == self.current_player for i in range(board_rows)):
+        row_length = len(self.game_board.board)
+        if all(self.game_board.board[index][index] == self.current_player for index in range(row_length)):
+            return True
+
+    # Iterate the length of row and check column minus row count for current player stored in [0][2], [1][1], [2][0].
+    def is_winner_by_descending_right_diagonal(self):
+        row_length = len(self.game_board.board)
+        column_index = -1
+        if all(self.game_board.board[index][column_index-index] == self.current_player for index in range(row_length)):
             return True
 
     def is_draw(self):
@@ -80,9 +87,14 @@ class GameManager:
     def has_winner(self):
         is_winner_by_row = self.is_winner_by_row()
         is_winner_by_column = self.is_winner_by_column()
-        is_winner_by_diagonal = self.is_winner_by_descending_left_diagonal()
+        is_winner_by_descending_left_diagonal = self.is_winner_by_descending_left_diagonal()
+        is_winner_by_descending_right_diagonal = self.is_winner_by_descending_right_diagonal()
 
-        conditions = [is_winner_by_row, is_winner_by_column, is_winner_by_diagonal]
+        conditions = [is_winner_by_row,
+                      is_winner_by_column,
+                      is_winner_by_descending_left_diagonal,
+                      is_winner_by_descending_right_diagonal]
+
         for result in conditions:
             if result:
                 print(f"Player {self.current_player} win!")
