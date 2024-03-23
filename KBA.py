@@ -32,6 +32,11 @@ manipulated within the functions local scope; and discarded if not returned to t
 In summary - I think it is a little bit of both, referencing the original object outside the scope of the function, and
 making a copy of the object within the function.
 
+Update:
+Interesting read: https://nedbatchelder.com/text/names.html - although possibly outdated (2014).
+Additional Note: pythons parameter-passing uses pass-by-object which is considered a combination of both.
+
+
 
 4. Given the following Python code, what will be the output and why?
 
