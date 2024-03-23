@@ -19,12 +19,12 @@ setup(
     ],
 
     # Metadata for your project
-    author="Your Name",
-    author_email="your-email@example.com",
+    author="Rhys Boyle",
+    author_email="20103371@tafe.wa.edu.au",
     description="A refactored version of a Tic Tac Toe game",
     license="MIT",
     keywords="tic-tac-toe refactoring",
-    url="http://github.com/your_username/tic-tac-toe",  # project home page
+    url="http://https://github.com/NM-TAFE/modularity-and-2d-data-structures-Rumsie-Grimshaw",  # project home page
 )
 
 # With this setup.py in place, you can install your project in another environment with pip:
